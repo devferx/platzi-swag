@@ -6,7 +6,7 @@ export default function Jumbo() {
     <StyledJumbo>
       <div>
         <h2>¡Consigue el mejor swag exclusivo y espcial de Platzi!</h2>
-        <small>Piezasa elegantes para los mejores estudiantes</small>
+        <small>Piezas elegantes para los mejores estudiantes</small>
       </div>
     </StyledJumbo>
   )
