@@ -13,7 +13,7 @@ export const query = graphql`
         }
       }
     }
-    allStripePrice {
+    allStripePrice(sort: { fields: unit_amount, order: DESC }) {
       edges {
         node {
           id
