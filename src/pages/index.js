@@ -32,17 +32,12 @@ export const query = graphql`
   }
 `
 
-const IndexPage = ({ data }) => {
-  console.log("🚀 ~ file: index.js ~ line 38 ~ IndexPage ~ data", data)
-  return (
-    <>
-      <SEO title="Home" />
-      <Jumbo
-        description={data.allSite.edges[0].node.siteMetadata.description}
-      />
-      <Products products={data.allStripePrice.edges} />
-    </>
-  )
-}
+const IndexPage = ({ data }) => (
+  <>
+    <SEO title="Home" />
+    <Jumbo description={data.allSite.edges[0].node.siteMetadata.description} />
+    <Products products={data.allStripePrice.edges} />
+  </>
+)
 
 export default IndexPage

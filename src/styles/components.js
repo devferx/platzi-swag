@@ -150,6 +150,7 @@ export const StyledProducts = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem 5rem 1rem;
+  cursor: pointer;
   h2 {
     color: ${colors.darkBlue};
     font-size: 2rem;
@@ -157,7 +158,7 @@ export const StyledProducts = styled.div`
   & img {
     width: 100%;
     height: 400px;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     margin: 0;
   }
