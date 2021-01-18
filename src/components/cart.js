@@ -7,6 +7,7 @@ import { CartContext } from "../context"
 export default function Cart() {
   const { cart } = useContext(CartContext)
   const [total, setTotal] = useState(0)
+  const [stripe, setStripe] = useState(null)
 
   const getTotal = () => {
     setTotal(
@@ -17,7 +18,23 @@ export default function Cart() {
     )
   }
 
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: cart.map(({ sku, quantity }) => ({ price: sku, quantity })),
+      mode: "payment",
+      successUrl: process.env.SUCCESS_REDIRECT,
+      cancelUrl: process.env.CANCEL_REDIRECT,
+    })
+
+    if (error) {
+      throw error
+    }
+  }
+
   useEffect(() => {
+    setStripe(window.Stripe(process.env.STRIPE_PK))
     getTotal()
   }, [])
 
@@ -32,8 +49,8 @@ export default function Cart() {
             <th>Cantidad</th>
             <th>Total</th>
           </tr>
-          {cart.map((swag, i) => (
-            <tr key={i}>
+          {cart.map(swag => (
+            <tr key={swag.sku}>
               <td>
                 <img src={swag.metadata.img} alt={swag.name} />
                 {swag.name}
@@ -54,7 +71,9 @@ export default function Cart() {
           <Link to="/">
             <Button type="outline">Volver</Button>
           </Link>
-          <Button>Comprar</Button>
+          <Button onClick={handleSubmit} disabled={cart.length === 0}>
+            Comprar
+          </Button>
         </div>
       </nav>
     </StyledCart>
