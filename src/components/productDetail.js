@@ -7,9 +7,9 @@ import {
   SizeSelect,
   StyledProductDetail,
   QtySelect,
-  // Button,
+  Button,
 } from "../styles/components"
-import { SEO } from "./"
+import { SEO, Stars } from "./"
 
 export default function ProductDetail({
   unit_amount,
@@ -27,7 +27,10 @@ export default function ProductDetail({
         <Tag>Popular</Tag>
         <h2>{name}</h2>
         <b>USD {formatedPrice}</b>
-        {metadata.wear && (
+        <Stars />
+        {metadata.wear == "true" && <h3>Color: Azul</h3>}
+        <small>{metadata.description}</small>
+        {metadata.wear == "true" && (
           <SizeSelect selected={size}>
             <SizeButton onClick={() => setSize(1)}>XS</SizeButton>
             <SizeButton onClick={() => setSize(2)}>S</SizeButton>
@@ -43,6 +46,7 @@ export default function ProductDetail({
           <input type="text" disabled value={qty} />
           <QtyButton onClick={() => setQty(qty + 1)}>+</QtyButton>
         </QtySelect>
+        <Button>Agregar al Carrito</Button>
       </div>
     </StyledProductDetail>
   )
